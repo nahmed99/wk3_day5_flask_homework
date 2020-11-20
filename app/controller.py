@@ -25,7 +25,8 @@ def index():
 @app.route('/welcome') # This listens for 'requests' to the home/root
 def welcome():
     # This and other below are normal python functions...
-    return render_template('welcome.html', title="Welcome")
+    # return render_template('welcome.html', title="Welcome") - moved contents to index.html, and deleted this file.
+    return render_template('index.html', title="Welcome")
 
 
 @app.route('/<hand1>/<hand2>')
