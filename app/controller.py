@@ -1,4 +1,5 @@
-from flask import render_template, request, redirect
+# from flask import render_template, request, redirect - don't need request and redirect for the simple 'GET' in the initial, MVP part of the application
+from flask import render_template
 from app import app
 from app.models.game import Game
 from app.models.player import Player
@@ -12,39 +13,9 @@ from app.models.player import Player
 @app.route('/') # This listens for 'requests' to the home/root
 def index():
     # This and other below are normal python functions...
-    return render_template('index.html', title="Home", tasks=tasks)
+    return render_template('index.html', title="Home")
 
 
-# This defaults to a GET request
-@app.route('/info')
-def info():
-    return render_template('info.html', title='info')
-
-
-# This defaults to a GET request
-@app.route('/create')
-def create():
-    return render_template('create.html', title='Add New Todo')
-
-
-#================== HANDLING DATA controllers ===================
-
-# Creating a POST request. This will be a response to the
-# data entered in the /create above.
-@app.route('/add-task', methods=["POST"])
-def add_task():
-    print(request.form) # this will be shown in the terminal
-
-    # Take the data from the form
-    task_title = request.form["title"]
-    task_description = request.form["description"]
-    # print("The values extracted from request.form: ", task_title, task_description)
-
-    # make a new instance of a Task using the data as constructor values
-    task = Task(task_title, task_description, False)
-
-    # add that new task object to the tasks list
-    add_new_task(task)
-
-    # return "Done" 
-    return redirect("/") # rather than returning "Done", we redirect to home/root page. We could redirect to formatted 'done' page.
+@app.route('/<hand1>/<hand2>')
+def play_game(hand1, hand2):
+    return f"Hello, {hand1} {hand2}"
