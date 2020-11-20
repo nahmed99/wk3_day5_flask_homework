@@ -18,4 +18,18 @@ def index():
 
 @app.route('/<hand1>/<hand2>')
 def play_game(hand1, hand2):
-    return f"Hello, {hand1} {hand2}"
+    player_1 = Player("Player 1", hand1)
+    player_2 = Player("Player 2", hand2)
+    game = Game(player_1, player_2)
+
+    result = f"Player 1 had {hand1} and player 2 had {hand2}. "
+
+    if game.check_winner():
+        result += "The winner is player 1"
+    elif game.check_winner() == None:
+        result += "It is a DRAW!"
+    else: 
+        result += "The winner is player 2"
+    
+    # return f"Player 1 had {hand1} and player 2 had {hand2}."
+    return result
